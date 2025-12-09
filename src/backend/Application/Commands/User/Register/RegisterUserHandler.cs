@@ -38,7 +38,7 @@ public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, Result<R
             return Result<RegisterUserResponse>.Failure(UserErrors.AlreadyExists);
         }
 
-        // 3. Create Entity
+        // Create Entity
         var user = Domain.Entities.User.Create(
             request.FirstName,
             request.LastName,
