@@ -1,9 +1,9 @@
 ﻿using Application.Interfaces;
+using Domain.Primitives;
 using Domain.Services;
-using Domain.Shared;
 using MediatR;
 
-namespace Application.Commands.Auth;
+namespace Application.Commands.Auth.Login;
 // este handler, ORQUESTRA. não faz nada mais além da ORQUESTRAÇÃO, top to bottom.
 public class LoginHandler : IRequestHandler<LoginCommand, Result<LoginResponse>>
 {

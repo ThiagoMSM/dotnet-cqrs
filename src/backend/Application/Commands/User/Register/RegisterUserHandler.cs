@@ -1,7 +1,7 @@
 ﻿using Domain.Errors;
+using Domain.Primitives;
 using Domain.Repositories;
 using Domain.Repositories.Users;
-using Domain.Shared;
 using Domain.ValueObjects;
 using MediatR;
 
