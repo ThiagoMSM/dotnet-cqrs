@@ -1,4 +1,4 @@
-﻿using Domain.Shared;
+﻿using Domain.Primitives;
 
 namespace Domain.Errors;
 

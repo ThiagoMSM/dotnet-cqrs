@@ -1,4 +1,4 @@
-﻿namespace Domain.Shared;
+﻿namespace Domain.Primitives;
 
 public record Error(string Code, string Name)
 {

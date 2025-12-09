@@ -1,7 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Errors;
+using Domain.Primitives;
 using Domain.Repositories.Users;
-using Domain.Shared;
 using Domain.ValueObjects;
 namespace Domain.Extensions;
 
