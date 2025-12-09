@@ -21,7 +21,7 @@ public static class DependencyInjectionExtension
         AddRepositories(services);
         AddFluentMigrator_MySql(services, configuration);
 
-        //services.Configure<JwtSettings>(options => configuration.GetSection("Jwt").Bind(options));
+        services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
         services.AddScoped<ITokenGenerator, JwtTokenGenerator>();
         services.AddScoped<UserAuthenticator>();
     }
