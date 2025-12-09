@@ -1,6 +1,6 @@
 ﻿namespace Domain.Primitives
 {
-    public class BaseEntity
+    public abstract class BaseEntity
     {
         public long Id { get; set; }
         public bool Active { get; set; } = true;

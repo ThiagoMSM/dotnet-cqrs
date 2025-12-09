@@ -21,7 +21,7 @@ namespace Domain.ValueObjects
                 throw new ArgumentException($"Invalid email format: {email}", nameof(email));
             
             
-            //toLoweInvariant pra ser paranoico, pq o tolower é baseado em onde vc tá no mundo, e pode dar ruim
+            //toLowerInvariant pra ser paranoico, pq o tolower é baseado em onde vc tá no mundo, e pode dar ruim
             return new Email(email.Trim().ToLowerInvariant()); // <-- chama o private cpf do construtor
         }
 

@@ -7,6 +7,8 @@ namespace Domain.Extensions;
 
 public static class UserRepositoryExtensions
 {
+    //centraliza buscas com tratamento padronizado
+    //importantíssimo, evita de existir 30 GetByIdOrFailureAsync e que cada um retorne erros diferentes
     public static async Task<Result<User>> GetByIdOrFailureAsync(
         this IUserReadOnlyRepository repository, //extende o mesmo IUserReadOnlyRepository, pra facilitar com testes, na inheritance, etc
         long id,

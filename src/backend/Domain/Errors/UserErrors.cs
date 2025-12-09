@@ -4,7 +4,7 @@ namespace Domain.Errors;
 
 public static class UserErrors
 {
-
+    // erros pro result pattern 
     public static readonly Error InvalidCredentials = new(
         "User.InvalidCredentials",
         "Invalid email or password.");

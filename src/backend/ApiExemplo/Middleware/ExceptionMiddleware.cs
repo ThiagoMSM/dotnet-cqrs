@@ -21,14 +21,15 @@ public class ExceptionMiddleware
     {
         try
         {
-            // 1. Let the request go through to the Controller -> MediatR -> Handler
+            //tenta fazer o proximo passo (Controller -> MediatR -> Handler)
             await _next(context);
         }
         catch (Exception ex)
         {
-            // 2. If ANY exception escapes the Handler, catch it here.
+            // 2. Loga o erro
             _logger.LogError(ex, "Unhandled exception occurred.");
 
+            // 3. Retorna um erro padronizado
             await HandleExceptionAsync(context, ex);
         }
     }
@@ -37,16 +38,16 @@ public class ExceptionMiddleware
     {
         context.Response.ContentType = "application/json";
 
-        // Default to 500 Internal Server Error
+        // status padrao (500)
         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-        // Use the standard "ProblemDetails" format (RFC 7807)
+        // monta o ProblemDetails
         var problem = new ProblemDetails
         {
             Status = context.Response.StatusCode,
             Type = "Server Error",
             Title = "An internal server error has occurred.",
-            Detail = exception.Message // In Prod, you usually hide this detail!
+            Detail = exception.Message
         };
 
         var json = JsonSerializer.Serialize(problem);

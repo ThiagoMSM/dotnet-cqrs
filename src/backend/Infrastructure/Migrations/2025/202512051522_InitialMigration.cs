@@ -7,7 +7,7 @@ namespace Infrastructure.Migrations
     {
         public override void Up()
         {
-            //evita de errar os nomes, só existe UMA fonte de verdade para nomes, e ela está na entidade
+            //evita de errar os nomes, só existe UMA fonte de verdade para nomes, e ela está no domain
             //q é o centro do universo
             CreateInheritedTable(nameof(User))
                 .WithColumn(nameof(User.UserIdentifier)).AsGuid().NotNullable().Unique()

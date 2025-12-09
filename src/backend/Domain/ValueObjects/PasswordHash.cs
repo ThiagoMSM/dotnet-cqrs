@@ -23,6 +23,7 @@ public sealed record PasswordHash
     }
 
     // carregar do db, pq aparentemente o EF core faria merda sem isso
+    // pq ele tentaria criar um hash de novo ao buscar e atribuir o tipo de PasswordHash
     public static PasswordHash LoadExisting(string hash)
     {
         if (string.IsNullOrWhiteSpace(hash))

@@ -23,7 +23,7 @@ namespace Domain.Entities
             Cpf = cpf;
 
         }
-        // create publico
+        // create publico (as classes PRECISAM usar um dos metodos)
         public static User Create(string firstName, string lastName, Email email, PasswordHash passwordHash, Cpf cpf)
         {
             return new User(

@@ -2,33 +2,31 @@
 {
     //sealed pq vc não consegue implementar
     public sealed record Cpf // classe especial que facilita o lookup
-                      // faz bater value com value (==) em vez de ===
+                      // faz bater value com value (==) em vez de === (valor e nao endereço)
     {
-        public string Value { get; } // get publico pq user.cpf tem q ser visto, eu acho
-        private Cpf(string value) => Value = value; // sei lá, construtor?
+        public string Value { get; } // get publico pq user.cpf tem q ser acessável
+        private Cpf(string value) => Value = value;
         //arrow expression shorthand pra não escrever {}...
- 
-        public static Cpf Create(string rawValue) //pq static?
-            //static pois vc não precisa instanciar a classe cpf (cpf = new cpf) pra usar
+
+        //unica forma de interagir com o cpf é por esse método
+        public static Cpf Create(string rawValue)
         {
             //lógica de validação do VO
             if (string.IsNullOrWhiteSpace(rawValue))
-                throw new Exception("CPF is required");
+                throw new ArgumentException("CPF is required"); // <-- tecnicamente, deveria ser um erro padronizado
+                                                                // não é result pattern pq é um erro de construção do objeto, não de fluxo
             var cleaned = rawValue.Replace(".", "").Replace("-", "");
             if (cleaned.Length != 11)
-                throw new Exception("CPF must be 11 digits");
+                throw new ArgumentException("CPF must be 11 digits");
             //mais validações etc etc e tal
             return new Cpf(cleaned); // <-- chama o private cpf do construtor
         }
-        //create chama lá, mas e o set? Set não existe, pq o create faz isso e o construtor já manda no value do get
 
-        //é uma regra, não sei qual seria a diferença de escrever explicit em vez de implicit
-        // mas td bem, é algo público, tipo um middleware? quando vc usa um cpf, na vdd, isso roda
-        // antes, faz um hijacking do valor, e volta o cpf.Value quando vc usa o cpf
-        // explicit precisa de casting ou tryparse, implicit assume q vc sabe oq tá fazendo
-        // mesma ideia de vc usar '!' no fim de uma expressão q vc sabe q não vai dar ruim
+        // faz o lookup ser mais fácil. sem casting do tipo Cpf necessário
+        // para acessar o Value
         public static implicit operator string(Cpf cpf) => cpf.Value;
 
+        // to string override para deixar os logs mais entendíveis (não vem com a estrutura do VO)
         public override string ToString() => Value;
     }
 }
