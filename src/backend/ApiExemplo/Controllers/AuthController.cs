@@ -29,8 +29,8 @@ public class AuthController : ControllerBase
             return result.Error.Code switch
             {
                 // usa a string constante (legal abstraír pra um canto único pra não dar 2 fontes de vdd)
-                "User.InvalidCredentials" => Unauthorized(result.Error),
-                _ => BadRequest(result.Error)
+                "User.InvalidCredentials" => Unauthorized(result.Error.Name),
+                _ => BadRequest(result.Error.Name)
             };
         }
 
