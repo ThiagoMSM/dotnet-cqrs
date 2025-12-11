@@ -34,13 +34,13 @@ public class UserController : ControllerBase
 
         // 201 created diferente, é tipo um banquete pro frontend
         return CreatedAtAction(
-            nameof(Register), // onde vc consegue pegar isso dnv (a rota get by id)
-            new { id = result.Value.UserIdentifier }, // manda o id do user criado pra rota acima
+            nameof(GetUserByGuid), // onde vc consegue pegar isso dnv (a rota get by id)
+            new { UserIdentifier = result.Value.UserIdentifier }, // manda o id do user criado pra rota acima
             result.Value // volta o result pro body
         );
     }
     [HttpGet]
-    public async Task<IActionResult> GetUserByIdentifier([FromQuery] GetUserByGuidQuery query)
+    public async Task<IActionResult> GetUserByGuid([FromQuery] GetUserByGuidQuery query)
     {
         var result = await _mediator.Send(query);
 
