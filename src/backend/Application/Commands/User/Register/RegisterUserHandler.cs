@@ -28,7 +28,7 @@ public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, Result<R
         // VOs, (eles jogam quando inválido, o handler n trata, o middleware trata e devolve 400/500)
         // alternativamente, vc pode fazer try/catch aqui e devolver Result.Failure
         var email = Email.Create(request.Email);
-        var password = PasswordHash.CreateFromRaw(request.Password); // Hashing happens here
+        var password = PasswordHash.CreateFromRaw(request.Password);
         var cpf = Cpf.Create(request.Cpf);
 
         // 2. checa se o email já existe

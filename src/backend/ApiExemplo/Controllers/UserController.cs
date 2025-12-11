@@ -1,5 +1,6 @@
 ﻿using Application.Commands.User.Register;
 using Application.Queries.User.GetUserByGuid;
+using Domain.Errors;
 using Domain.Primitives;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -27,7 +28,7 @@ public class UserController : ControllerBase
         {
             return result.Error.Code switch
             {
-                "User.AlreadyExists" => Conflict(result.Error.Name), // 409 Conflict
+                UserErrors.AlreadyExistsCode => Conflict(result.Error.Name), // 409 Conflict
                 _ => BadRequest(result.Error.Name)
             };
         }
@@ -50,7 +51,7 @@ public class UserController : ControllerBase
         {
             return result.Error.Code switch
             {
-                "User.NotFound" => NotFound(result.Error.Name),
+                UserErrors.NotFoundCode => NotFound(result.Error.Name),
                 _ => BadRequest(result.Error.Name)
             };
 

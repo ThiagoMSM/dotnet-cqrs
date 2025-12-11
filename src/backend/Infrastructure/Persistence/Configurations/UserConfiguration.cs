@@ -35,7 +35,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User> //passa user com
             .IsRequired()
             .HasConversion(
                 pass => pass.Value,                       // Write
-                value => PasswordHash.LoadExisting(value) // Read (Prevent double-hashing!)
+                value => PasswordHash.LoadExisting(value) // Read (Prevent double-hashing)
             );
     }
 }
