@@ -42,6 +42,7 @@ app.MapControllers();
 
 app.Run();
 
-// bruxaria do dotnet, o program fica privado depois da compliação, aí vc fala
-// q ele é partial, é um workaround, pq aí ele fica público...
+/* Coisa do Dotnet/Roslyn. O program fica privado depois da compliação, aí falando
+ * que ele é partial, é um workaround, pq aí ele permanece público para mocks e tests...
+ */
 public partial class Program { }

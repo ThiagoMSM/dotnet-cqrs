@@ -3,7 +3,7 @@ using MediatR;
 using Application.Commands.Auth.Login;
 using Domain.Errors;
 
-namespace API.Controllers;
+namespace ApiExemplo.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -26,7 +26,7 @@ public class AuthController : ControllerBase
         // 2. Checa o result
         if (result.IsFailure)
         {
-            // 3. Mapeia os erros de domínio em http (pq controller cuida de http)
+            // 3. Mapeia os erros de domínio em http (pois API cuida de http)
             return result.Error.Code switch
             {
                 // usa referencia, evita string constante.
@@ -35,7 +35,6 @@ public class AuthController : ControllerBase
             };
         }
 
-        // caso contrario, manda q funfou
         return Ok(result.Value);
     }
 }

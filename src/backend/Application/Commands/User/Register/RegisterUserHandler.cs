@@ -25,8 +25,8 @@ public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, Result<R
 
     public async Task<Result<RegisterUserResponse>> Handle(RegisterUserCommand request, CancellationToken ct)
     {
-        // VOs, (eles jogam quando inválido, o handler n trata, o middleware trata e devolve 400/500)
-        // alternativamente, vc pode fazer try/catch aqui e devolver Result.Failure
+        // VOs, (eles dão throw quando inválido, o handler não trata, o middleware trata e devolve 400/500)
+        // alternativamente, é possível fazer try/catch aqui e devolver Result.Failure
         var email = Email.Create(request.Email);
         var password = PasswordHash.CreateFromRaw(request.Password);
         var cpf = Cpf.Create(request.Cpf);

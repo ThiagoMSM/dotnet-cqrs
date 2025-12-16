@@ -35,5 +35,6 @@ namespace Domain.Entities
                 cpf
                 );
         }
+        // Outros métodos viveriam aqui, ChangePassword, UpdateEmail, etc
     }
 }

@@ -7,10 +7,12 @@ namespace Domain.Extensions;
 
 public static class UserRepositoryExtensions
 {
-    //centraliza buscas com tratamento padronizado
-    //importantíssimo, evita de existir 30 GetByIdOrFailureAsync e que cada um retorne erros diferentes
+    /* Centraliza buscas com tratamento padronizado
+     * Importante, evita de existir vários GetByIdOrFailureAsync e que cada um retorne erros diferentes
+     * Centraliza passos simples e repetitivos, que extendem os métodos de infra (GetByIdAsync, GetByGuidAsync, etc.).
+    */
     public static async Task<Result<User>> GetByIdOrFailureAsync(
-        this IUserReadOnlyRepository repository, //extende o mesmo IUserReadOnlyRepository, pra facilitar com testes, na inheritance, etc
+        this IUserReadOnlyRepository repository, //extende o mesmo IUserReadOnlyRepository, pra facilitar com testes e na inheritance
         long id,
         CancellationToken ct = default)
     {
@@ -38,7 +40,7 @@ public static class UserRepositoryExtensions
         return Result<User>.Success(user);
     }
     public static async Task<Result<User>> GetByEmailOrFailureAsync(
-        this IUserReadOnlyRepository repository, //extende o mesmo IUserReadOnlyRepository, pra facilitar com testes, na inheritance, etc
+        this IUserReadOnlyRepository repository,
         Email email,
         CancellationToken ct = default)
     {

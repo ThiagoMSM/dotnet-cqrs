@@ -5,8 +5,9 @@ using Domain.ValueObjects;
 
 namespace Infrastructure.Persistence.Configurations;
 
-// é publico por convenção, e pra facilitar com essa inheritance
-// mas em termos DDD puristas, seria internal
+/* É publico por convenção, e pra facilitar com essa inheritance
+ * mas em termos DDD puristas, seria internal
+ */
 public class UserConfiguration : IEntityTypeConfiguration<User> //passa user como generic
 {
     public void Configure(EntityTypeBuilder<User> builder)
@@ -35,7 +36,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User> //passa user com
             .IsRequired()
             .HasConversion(
                 pass => pass.Value,                       // Write
-                value => PasswordHash.LoadExisting(value) // Read (Prevent double-hashing)
+                value => PasswordHash.LoadExisting(value) // Read (Prevem double-hashing)
             );
     }
 }

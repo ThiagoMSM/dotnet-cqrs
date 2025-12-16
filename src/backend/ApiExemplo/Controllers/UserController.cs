@@ -1,9 +1,7 @@
 ﻿using Application.Commands.User.Register;
 using Application.Queries.User.GetUserByGuid;
 using Domain.Errors;
-using Domain.Primitives;
 using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiExemplo.Controllers;
@@ -33,7 +31,7 @@ public class UserController : ControllerBase
             };
         }
 
-        // 201 created diferente, é tipo um banquete pro frontend
+        // 201 created diferente, quase um banquete para o frontend
         return CreatedAtAction(
             nameof(GetUserByGuid), // onde vc consegue pegar isso dnv (a rota get by id)
             new { id = result.Value.UserIdentifier }, // manda o id do user criado pra rota acima

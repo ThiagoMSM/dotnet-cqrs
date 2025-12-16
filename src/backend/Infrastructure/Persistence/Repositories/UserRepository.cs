@@ -16,17 +16,13 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
         _context = context;
     }
 
-    // =================================================================
-    // WRITE OPERATIONS (IUserWriteOnlyRepository)
-    // =================================================================
+    // write:
     public async Task AddAsync(User user, CancellationToken ct)
     {
         await _context.Users.AddAsync(user, ct);
     }
 
-    // =================================================================
-    // UPDATE OPERATIONS (IUserUpdateOnlyRepository)
-    // =================================================================
+    // update:
     public void Update(User user)
     {
         _context.Users.Update(user);
@@ -35,7 +31,7 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
     // read:
     public async Task<bool> ExistsByEmailAsync(Email email, CancellationToken ct)
     {
-        //tracking seria pra pegar mudança e commitar junto, meio inútil em 99.99% dos casos de fetching data
+        // Tracking seria pra pegar mudança e commitar junto, meio inútil em 99.99% dos casos de fetching data
         return await _context.Users
             .AsNoTracking()
             .AnyAsync(u => u.Email == email, ct);

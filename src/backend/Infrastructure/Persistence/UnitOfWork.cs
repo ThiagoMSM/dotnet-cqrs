@@ -5,7 +5,6 @@ using System.Data;
 
 namespace Infrastructure.Persistence;
 
-//dps entender essa bomba aqui, mas não importa muito agr
 public class UnitOfWork : IUnitOfWork
 {
     private readonly AppDbContext _dbContext;

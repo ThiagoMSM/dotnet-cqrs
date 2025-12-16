@@ -5,7 +5,6 @@ namespace Infrastructure.Migrations
 {
     public abstract class VersionBase : ForwardOnlyMigration
     {
-        // ???????????????/ QUEM USA CREATETABLE E CREATE.TABLE?? PELO AMOR DE DEUS
         protected ICreateTableColumnOptionOrWithColumnSyntax CreateInheritedTable(string table)
         {
             return Create.Table(table)

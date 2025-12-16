@@ -6,10 +6,12 @@ using Domain.ValueObjects;
 
 namespace Domain.Services
 {
-    //Passos complexos, mas que precisam ser centralizados, moram aqui
-    //Isso poluiria a application, e é uma regra base, então vive aqui no domain
-    //a app não precisa saber como é feito, ele só QUER q seja feito, ele orquestra.
-    //tbm evita de ter mil valores de retorno diferente, já q agrega tudo aqui
+    /* Em prol da centralização do Domain, e da simplificação da Application,
+     * esses serviços agem como helpers para a Application.
+     * Centralizam passos procedurais comuns, que envolvem múltiplos repositórios ou múltiplas etapas.
+     * Não se encaixam em Extensions, pois não "extendem" nenhum método de infra, mas sim, criam rotinas tangentes.
+     * E também, são mais complexos que os passos centralizados em Extensions
+     * */
     public class UserAuthenticator
     {
         private readonly IUserReadOnlyRepository _repo;
@@ -22,11 +24,10 @@ namespace Domain.Services
         {
             var user = await _repo.GetByEmailAsync(Email.Create(email), ct);
 
-            if (user is null || !user.PasswordHash.Verify(password))
+            if (user is null || !user.PasswordHash.IsValid(password))
             {
                 return Result<User>.Failure(UserErrors.InvalidCredentials);
             }
-            // result<generic>.metodo(oqvcquerdardps) (la ele)
             return Result<User>.Success(user);
         }
     }

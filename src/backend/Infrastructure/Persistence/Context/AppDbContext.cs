@@ -5,12 +5,10 @@ namespace Infrastructure.Persistence.Context;
 
 public class AppDbContext : DbContext
 {
-    // Constructor passes options (connection string, retry logic) to base
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
 
-    // Define your DbSets (Tables)
     public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
